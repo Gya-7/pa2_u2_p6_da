@@ -1,6 +1,7 @@
 package ec.edu.uce.infrastructure.repository;
 
 import ec.edu.uce.domain.model.Estudiante;
+import ec.edu.uce.domain.repository.EstudianteRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
@@ -8,7 +9,7 @@ import jakarta.transaction.Transactional;
 
 @ApplicationScoped
 @Transactional // COmo esta clase esta destinada a conectarse a la base de datos debe haber una transaccion (Se explicada despues)
-public class EstudianteRepositoryImpl implements ec.edu.uce.domain.repository.EstudianteRepository {
+public class EstudianteRepositoryImpl implements EstudianteRepository {
                             
     @Inject
     private EntityManager em;

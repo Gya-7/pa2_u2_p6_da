@@ -3,7 +3,9 @@ package ec.edu.uce;
 import java.time.LocalDate;
 
 import ec.edu.uce.application.service.EstudianteService;
+import ec.edu.uce.application.service.ProfesorService;
 import ec.edu.uce.domain.model.Estudiante;
+import ec.edu.uce.domain.model.Profesor;
 import io.quarkus.runtime.Quarkus;
 import io.quarkus.runtime.QuarkusApplication;
 import io.quarkus.runtime.annotations.QuarkusMain;
@@ -20,14 +22,20 @@ public class Main {
 
     public static class App implements QuarkusApplication {
 
+        /*
         @Inject
         private EstudianteService estudianteService;
+        */
+
+        @Inject
+        private ProfesorService profesorService;
 
  
 
         @Override
         public int run(String... args) {
 
+            /* 
             Estudiante e = new Estudiante();
             e.setNombre("Dayerlin");
             e.setApellido("Aguilar");
@@ -51,15 +59,34 @@ public class Main {
 
             this.estudianteService.borrar(1);
 
+            */
 
+            Profesor p = new Profesor();
+            p.setNombre("Dayerlin");
+            p.setApellido("Aguilar");
+            p.setDepartamento("Computacion");
+            p.setCorreo("dgaguilar@uce.edu.ec");
 
+            this.profesorService.guardar(p);
+            System.out.println("Profesor " + p.getApellido() + " con ID: " + p.getId());
+            System.out.println("--------------------------------------------------------------------------------------");
 
+            Profesor profesorEncontrado = this.profesorService.seleccionarPorId(1);
+            if (profesorEncontrado != null) {
+                System.out.println("Se seleccionó el profesor con id -> " + profesorEncontrado.getId() + " y Apellido: " + profesorEncontrado.getApellido());
 
-
-
-
-    
+            } else {
+                System.out.println("Aviso: No se encontró ningún profesor con el ID 1.");
+            }
             
+            System.out.println("--------------------------------------------------------------------------------------");
+            p.setApellido("Canias");
+            this.profesorService.actualizar(1, p);
+
+            System.out.println("--------------------------------------------------------------------------------------");
+            this.profesorService.eliminar(1);
+            System.out.println("Seleccionado -> " + this.profesorService.seleccionarPorId(1));
+
 
             return 0;
 
