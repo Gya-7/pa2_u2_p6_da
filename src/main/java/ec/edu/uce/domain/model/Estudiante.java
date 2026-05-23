@@ -14,12 +14,16 @@ import jakarta.persistence.Table;
 @Table(name = "estudiante")
 public class Estudiante {
 
+    // EN MAPEO DE ENTIDADES SIEMPRE SE DEBERIA CREAR CON OBJETOS, NO CON int, ouble sino con INTEGER DOUBLE
     @Id //SIEMPRE EN LA CLAVE PRIMARIA
     // Hace referencia al mismo, no es crearlo otra vez/ nombre de la secuencia con la que esta en la base de datos / en cuanto se va a incrementar
     @SequenceGenerator(name = "seq_estudiante_generador", sequenceName = "sec_estudiante", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_estudiante_generador")
     @Column(name = "estu_id")
     private Integer id;
+
+    @Column(name = "estu_cedula")
+    private String cedula;
 
     @Column(name = "estu_nombre")
     private String nombre;
@@ -29,7 +33,7 @@ public class Estudiante {
 
     @Column(name = "estu_fecha_nacimiento")
     private LocalDate fechaNacimiento;
-    
+
     @Column(name = "estu_genero")
     private String genero;
 
@@ -71,6 +75,20 @@ public class Estudiante {
 
     public void setGenero(String genero) {
         this.genero = genero;
+    }
+
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
+    }
+
+    @Override
+    public String toString() {
+        return "Estudiante [id=" + id + ", cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido + ", fechaNacimiento="
+                + fechaNacimiento + ", genero=" + genero + "]";
     }
 
 }
