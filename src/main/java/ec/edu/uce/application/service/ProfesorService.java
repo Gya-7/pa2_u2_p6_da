@@ -1,5 +1,7 @@
 package ec.edu.uce.application.service;
 
+import java.util.List;
+
 import ec.edu.uce.domain.model.Profesor;
 import ec.edu.uce.domain.repository.ProfesorRepository;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -16,7 +18,7 @@ public class ProfesorService {
         try {
 
             this.profesorRepository.crear(profesor);
-            System.out.println("Se ha guardado exitosamente");
+            System.out.println("Se ha guardado exitosamente el profesor con id: " + profesor.getId());
             return true;
             
         } catch (Exception e) {
@@ -81,6 +83,25 @@ public class ProfesorService {
             return false;
             
         }
+    }
+
+    public List<Profesor> seleccionarTodos(){
+
+        return this.profesorRepository.seleccionarTodos();
+
+    }
+
+    public List<Profesor> consultarPorNombre(String nombre){
+
+
+        return this.profesorRepository.seleccionarPorNombre(nombre);
+
+    }
+
+    public Profesor consultarPorCedula(String cedula){
+
+        return this.profesorRepository.seleccionarPorCedula(cedula);
+
     }
 
 

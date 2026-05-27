@@ -1,6 +1,7 @@
 package ec.edu.uce;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import ec.edu.uce.application.service.EstudianteService;
 import ec.edu.uce.application.service.ProfesorService;
@@ -35,57 +36,83 @@ public class Main {
         @Override
         public int run(String... args) {
 
-            /* 
-            Estudiante e = new Estudiante();
-            e.setNombre("Dayerlin");
-            e.setApellido("Aguilar");
-            e.setFechaNacimiento(LocalDate.of(2001, 07, 28));
-            e.setGenero("F");
-            
-            this.estudianteService.guardar(e);
-            System.out.println("Seleccionado: " + this.estudianteService.seleccionarPorId(1).getNombre());
+            System.err.println("GUARDAR PROFESORES");
 
-            Estudiante ea = new Estudiante();
-            ea.setNombre("Gyannelina");
-            ea.setApellido("Cañas");
-            ea.setFechaNacimiento(LocalDate.of(2001, 07, 28));
-            ea.setGenero("F");
+            // Profesor 1
+            Profesor p1 = new Profesor();
+            p1.setCedula("1712345678");
+            p1.setNombre("Carlos");
+            p1.setApellido("Mendoza");
+            p1.setDepartamento("Matemáticas");
+            p1.setCorreo("carlos.mendoza@uce.edu.ec");
 
-            this.estudianteService.guardar(ea);
+            this.profesorService.guardar(p1);
 
-            ea.setNombre("Gyannela");
-            this.estudianteService.actualizar(2, ea);
-            System.out.println("Seleccionado: " + this.estudianteService.seleccionarPorId(2).getNombre());
+            // Profesor 2
+            Profesor p2 = new Profesor();
+            p2.setCedula("0923456781");
+            p2.setNombre("Ana");
+            p2.setApellido("Gómez");
+            p2.setDepartamento("Sistemas");
+            p2.setCorreo("ana.gomez@uce.edu.ec");
 
-            this.estudianteService.borrar(1);
+            this.profesorService.guardar(p2);
 
-            */
+            // Profesor 3
+            Profesor p3 = new Profesor();
+            p3.setCedula("1104567892");
+            p3.setNombre("Luis");
+            p3.setApellido("Torres");
+            p3.setDepartamento("Física");
+            p3.setCorreo("luis.torres@uce.edu.ec");
 
-            Profesor p = new Profesor();
-            p.setNombre("Dayerlin");
-            p.setApellido("Aguilar");
-            p.setDepartamento("Computacion");
-            p.setCorreo("dgaguilar@uce.edu.ec");
+            this.profesorService.guardar(p3);
 
-            this.profesorService.guardar(p);
-            System.out.println("Profesor " + p.getApellido() + " con ID: " + p.getId());
-            System.out.println("--------------------------------------------------------------------------------------");
+            // Profesor 4
+            Profesor p4 = new Profesor();
+            p4.setCedula("1104567892");
+            p4.setNombre("Carlos");
+            p4.setApellido("Enriquez");
+            p4.setDepartamento("Ingles");
+            p4.setCorreo("carlos.enrique@uce.edu.ec");
 
-            Profesor profesorEncontrado = this.profesorService.seleccionarPorId(1);
-            if (profesorEncontrado != null) {
-                System.out.println("Se seleccionó el profesor con id -> " + profesorEncontrado.getId() + " y Apellido: " + profesorEncontrado.getApellido());
+            this.profesorService.guardar(p4);
 
-            } else {
-                System.out.println("Aviso: No se encontró ningún profesor con el ID 1.");
+            // Profesor 5
+            Profesor p5 = new Profesor();
+            p5.setCedula("1234567890");
+            p5.setNombre("Ana");
+            p5.setApellido("Torres");
+            p5.setDepartamento("Arte");
+            p5.setCorreo("ana.torres@uce.edu.ec");
+
+            this.profesorService.guardar(p5);
+
+
+            System.out.println("\nLISTA COMPLETA");
+            List<Profesor> listaCompleta = this.profesorService.seleccionarTodos();
+            for(Profesor profesor : listaCompleta){
+
+                System.out.println(profesor.toString());
+
+            }
+
+            String name = "Ana";
+
+            System.out.println("\nLISTA POR NOMBRE: " + name);
+            List <Profesor> listaPorNombre = this.profesorService.consultarPorNombre(name);
+            for(Profesor profesor : listaPorNombre){
+
+                System.out.println(profesor.toString());
+
             }
             
-            System.out.println("--------------------------------------------------------------------------------------");
-            p.setApellido("Canias");
-            this.profesorService.actualizar(1, p);
-
-            System.out.println("--------------------------------------------------------------------------------------");
-            this.profesorService.eliminar(1);
-            System.out.println("Seleccionado -> " + this.profesorService.seleccionarPorId(1));
+            String cedula = "1104567892";
+            
+            System.out.println("\nLISTA POR CEDULA: " + cedula);
+            Profesor consultaPorCedula = this.profesorService.consultarPorCedula(cedula);
+            System.out.println(consultaPorCedula);
+            
 
 
             return 0;

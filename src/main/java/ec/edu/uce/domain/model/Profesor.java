@@ -18,6 +18,9 @@ public class Profesor {
     @Column(name = "prof_id")
     private Integer id;
 
+    @Column(name = "prof_cedula")
+    private String cedula;
+
     @Column(name = "prof_nombre")
     private String nombre;
 
@@ -70,6 +73,20 @@ public class Profesor {
 
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
+    }
+
+    @Override
+    public String toString() {
+        return "Profesor Id: " + id + ", cedula: " + cedula + ", nombre: " + nombre + ", apellido: " + apellido
+                + ", departamento: " + departamento + ", correo: " + correo;
     }
 
 }
