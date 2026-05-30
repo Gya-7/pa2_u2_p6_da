@@ -56,41 +56,14 @@ public class Main {
 
             this.estudianteService.guardar(e2);
 
-            //TYPED
-            System.out.println("\nTYPED");
-            List<Estudiante> eTyped = this.estudianteService.consultarPorGeneroTyped("M");
-            for(Estudiante estudiante: eTyped){
+            System.out.println("\nNATIVE QUERY");
+            List<Estudiante> listaNative = this.estudianteService.seleccionarTodosNative();
+            for(Estudiante estudiante: listaNative){
 
                 System.out.println(estudiante.toString());
 
             }
 
-
-            System.out.println("\nNO TYPED");
-            List<Estudiante> eNamed = this.estudianteService.consultarPorGenero("F");
-            for(Estudiante estudiante: eNamed){
-
-                System.out.println(estudiante.toString());
-
-            }
-
-            LocalDate inicio = LocalDate.of(2000, 01, 01);
-            LocalDate fin = LocalDate.of(2020, 01, 01);
-
-            System.out.println("\nCONSULTA POR RANGO FECHA");
-            List<Estudiante> listaFecha = this.estudianteService.consultarPorRangoFecha(inicio, fin);
-            for (Estudiante estudiante : listaFecha) {
-
-                System.out.println(estudiante.toString());
-
-            }
-
-
-            System.out.println("\nCONTAR ESTUDIANTES");
-            Long value = this.estudianteService.contarEstudiantes();
-            System.out.println(value);
-
-        
 
             return 0;
 

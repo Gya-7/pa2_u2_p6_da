@@ -131,6 +131,18 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
 
     }
 
+    //NATIVE QUERY
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Estudiante> seleccionarTodosNative() {
+
+        Query myQuery  = this.em.createNativeQuery("SELECT * FROM estudiante", Estudiante.class);
+
+        return myQuery.getResultList();
+
+    }
+    
     
 
 

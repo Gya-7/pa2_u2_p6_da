@@ -30,5 +30,7 @@ public interface EstudianteRepository {
     //lo comun es usar long
     public Long seleccionarContar();
 
+    public List<Estudiante> seleccionarTodosNative();
+
 
 }

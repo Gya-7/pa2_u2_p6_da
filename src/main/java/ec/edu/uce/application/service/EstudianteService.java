@@ -90,5 +90,11 @@ public class EstudianteService {
 
     }
 
+    public List<Estudiante> seleccionarTodosNative(){
+
+        return this.estudianteRepository.seleccionarTodosNative();
+        
+    }
+
 
 }
