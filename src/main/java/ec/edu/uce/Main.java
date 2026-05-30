@@ -32,47 +32,65 @@ public class Main {
             Estudiante e = new Estudiante();
             e.setNombre("Dayerlin");
             e.setApellido("Aguilar");
-            e.setCedula("0602366021");
             e.setFechaNacimiento(LocalDate.of(2001, 07, 28));
             e.setGenero("F");
-            
+
             this.estudianteService.guardar(e);
-            //System.out.println("Seleccionado: " + this.estudianteService.seleccionarPorId(1).getNombre());
 
-            Estudiante ea = new Estudiante();
-            ea.setNombre("Gyannelina");
-            ea.setApellido("Cañas");
-            ea.setFechaNacimiento(LocalDate.of(2001, 07, 28));
-            ea.setGenero("F");
+            Estudiante e1 = new Estudiante();
+            e1.setNombre("Gyannelina");
+            e1.setApellido("Cañas");
+            e1.setCedula("0602366021");
+            e1.setFechaNacimiento(LocalDate.of(2001, 07, 28));
+            e1.setGenero("F");
 
-            this.estudianteService.guardar(ea);
-
-            ea.setNombre("Gyannela");
-            this.estudianteService.actualizar(2, ea);
-            System.out.println("Seleccionado: " + this.estudianteService.seleccionarPorId(2).getNombre());
+            this.estudianteService.guardar(e1);
 
 
-            System.out.println("LISTA COMPLETA");
+            Estudiante e2 = new Estudiante();
+            e2.setNombre("Carlos");
+            e2.setApellido("Bodoque");
+            e2.setCedula("1719486523");
+            e2.setFechaNacimiento(LocalDate.of(19911, 05, 13));
+            e2.setGenero("M");
 
+            this.estudianteService.guardar(e2);
 
-            List<Estudiante> lista = this.estudianteService.seleccionarTodos();
+            //TYPED
+            System.out.println("\nTYPED");
+            List<Estudiante> eTyped = this.estudianteService.consultarPorGeneroTyped("M");
+            for(Estudiante estudiante: eTyped){
 
-            for(Estudiante estudiante : lista){
                 System.out.println(estudiante.toString());
-            }
-
-            System.out.println("LISTA POR NOMBRE");
-
-            List<Estudiante> listaPorNombre = this.estudianteService.consultarPorNombre("Gyannela");
-
-            for (Estudiante estu : listaPorNombre) {
-
-                System.out.println(estu.toString());
 
             }
 
-            System.out.println("ESTUDIANTE POR CEDULA");
-            System.out.println(this.estudianteService.consultarPorCedula("0602366021"));
+
+            System.out.println("\nNO TYPED");
+            List<Estudiante> eNamed = this.estudianteService.consultarPorGenero("F");
+            for(Estudiante estudiante: eNamed){
+
+                System.out.println(estudiante.toString());
+
+            }
+
+            LocalDate inicio = LocalDate.of(2000, 01, 01);
+            LocalDate fin = LocalDate.of(2020, 01, 01);
+
+            System.out.println("\nCONSULTA POR RANGO FECHA");
+            List<Estudiante> listaFecha = this.estudianteService.consultarPorRangoFecha(inicio, fin);
+            for (Estudiante estudiante : listaFecha) {
+
+                System.out.println(estudiante.toString());
+
+            }
+
+
+            System.out.println("\nCONTAR ESTUDIANTES");
+            Long value = this.estudianteService.contarEstudiantes();
+            System.out.println(value);
+
+        
 
             return 0;
 
