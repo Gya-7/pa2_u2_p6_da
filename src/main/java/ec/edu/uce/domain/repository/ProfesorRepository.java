@@ -25,6 +25,14 @@ public interface ProfesorRepository {
     public List <Profesor> seleccionarPorCargaHoraria(Integer min, Integer max);
 
     public Long contarPorDepartamento(String departamento);
+    
+    public List<Profesor> seleccionarTodosNative();
+
+    public List<Profesor> seleccionarPorDepartamentoNative(String departamento);
+
+    public List<Profesor> seleccionarProfesoresActivosNative();
+    
+    public Long promedioCargaHorariaNative();
 
 
 }

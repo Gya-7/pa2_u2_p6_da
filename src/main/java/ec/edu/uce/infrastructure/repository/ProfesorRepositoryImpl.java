@@ -3,11 +3,13 @@ package ec.edu.uce.infrastructure.repository;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import ec.edu.uce.domain.model.Estudiante;
 import ec.edu.uce.domain.model.Profesor;
 import ec.edu.uce.domain.repository.ProfesorRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 
@@ -105,6 +107,47 @@ public class ProfesorRepositoryImpl implements ProfesorRepository{
         myQuery.setParameter("departamento", departamento);
 
         return myQuery.getSingleResult();
+    }
+
+    //NATIVE QUERIES
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Profesor> seleccionarTodosNative() {
+        
+        Query myQuery = this.em.createNativeQuery("SELECT * FROM profesor", Profesor.class);
+        
+        return myQuery.getResultList();
+
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Profesor> seleccionarPorDepartamentoNative(String departamento) {
+        
+        Query myQuery = this.em.createNativeQuery("SELECT * FROM profesor WHERE prof_departamento = :departamento", Profesor.class);
+        myQuery.setParameter("departamento", departamento);
+        
+        return myQuery.getResultList();
+
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Profesor> seleccionarProfesoresActivosNative() {
+        
+        Query myQuery = this.em.createNativeQuery("SELECT * FROM profesor WHERE prof_fecha_fin IS NULL", Profesor.class);
+        
+        return myQuery.getResultList();
+
+    }
+
+    @Override
+    public Long promedioCargaHorariaNative() {
+        
+        Query myQuery = this.em.createNativeQuery("SELECT AVG(prof_carga_horaria) FROM profesor");
+        
+        return ((Number) myQuery.getSingleResult()).longValue();
     }
 
     

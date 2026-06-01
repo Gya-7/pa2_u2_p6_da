@@ -122,6 +122,30 @@ public class ProfesorService {
 
     }
 
+    public List<Profesor> consultarTodosNative(){
+
+        return this.profesorRepository.seleccionarTodosNative();
+       
+    }
+
+    public List<Profesor> consultarPorDepartamentoNative(String departamento){
+
+        return this.profesorRepository.seleccionarPorDepartamentoNative(departamento);
+
+    }
+
+    public List<Profesor> consultarProfesoresActivosNative(){
+
+        return this.profesorRepository.seleccionarProfesoresActivosNative();
+
+    }
+    
+    public Long promedioCargaHorariaNative(){
+
+        return this.profesorRepository.promedioCargaHorariaNative();
+
+    }
+
 
 
 }

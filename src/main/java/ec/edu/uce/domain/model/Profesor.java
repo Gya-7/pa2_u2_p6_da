@@ -1,5 +1,7 @@
 package ec.edu.uce.domain.model;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -36,6 +38,12 @@ public class Profesor {
 
     @Column(name = "prof_departamento")
     private String departamento;
+
+    @Column(name = "prof_fecha_inicio")
+    private LocalDate fechaInicio;
+
+    @Column(name = "prof_fecha_fin")
+    private LocalDate fechaFin;
 
     @Column(name = "prof_carga_horaria")
     private Integer cargaHoraria;
@@ -85,11 +93,29 @@ public class Profesor {
         this.departamento = departamento;
     }
 
-    public Integer getCarga_horaria() {
+    
+
+    public LocalDate getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(LocalDate fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public LocalDate getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(LocalDate fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
+    public Integer getCargaHoraria() {
         return cargaHoraria;
     }
 
-    public void setCarga_horaria(Integer carga_horaria) {
+    public void setCargaHoraria(Integer carga_horaria) {
         this.cargaHoraria = carga_horaria;
     }
 
