@@ -5,11 +5,18 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "profesor")
+@NamedQueries({
+    @NamedQuery(name = "Profesor.listarApellidoNombreAsc", query = "SELECT p FROM Profesor p ORDER BY p.apellido ASC, p.nombre ASC"),
+    @NamedQuery(name = "Profesor.listarPorCargaHoraria", query = "SELECT p FROM Profesor p WHERE p.cargaHoraria BETWEEN :min AND :max"),
+    @NamedQuery(name = "Profesor.contarPorDepartamento", query = "SELECT COUNT(p) FROM Profesor p WHERE p.departamento = :departamento")
+})
 public class Profesor {
 
     @Id
@@ -30,6 +37,9 @@ public class Profesor {
     @Column(name = "prof_departamento")
     private String departamento;
 
+    @Column(name = "prof_carga_horaria")
+    private Integer cargaHoraria;
+
     @Column(name = "prof_correo")
     private String correo;
 
@@ -41,6 +51,14 @@ public class Profesor {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+        public String getCedula() {
+        return cedula;
+    }
+
+    public void setCedula(String cedula) {
+        this.cedula = cedula;
     }
 
     public String getNombre() {
@@ -67,6 +85,14 @@ public class Profesor {
         this.departamento = departamento;
     }
 
+    public Integer getCarga_horaria() {
+        return cargaHoraria;
+    }
+
+    public void setCarga_horaria(Integer carga_horaria) {
+        this.cargaHoraria = carga_horaria;
+    }
+
     public String getCorreo() {
         return correo;
     }
@@ -75,18 +101,10 @@ public class Profesor {
         this.correo = correo;
     }
 
-    public String getCedula() {
-        return cedula;
-    }
-
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
-    }
-
     @Override
     public String toString() {
         return "Profesor Id: " + id + ", cedula: " + cedula + ", nombre: " + nombre + ", apellido: " + apellido
-                + ", departamento: " + departamento + ", correo: " + correo;
+                + ", departamento: " + departamento + ", carga horaria: " + cargaHoraria + ", correo: " + correo;
     }
 
 }

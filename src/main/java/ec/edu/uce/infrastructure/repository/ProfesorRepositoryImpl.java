@@ -1,5 +1,6 @@
 package ec.edu.uce.infrastructure.repository;
 
+import java.lang.reflect.Type;
 import java.util.List;
 
 import ec.edu.uce.domain.model.Profesor;
@@ -73,5 +74,39 @@ public class ProfesorRepositoryImpl implements ProfesorRepository{
         return miQuery.getResultList().getFirst();
 
     }
+
+    //NAMED QUERIES
+
+    @Override
+    public List<Profesor> ordenPorApellidoNombre() {
+        
+        TypedQuery<Profesor> myQuery = this.em.createNamedQuery("Profesor.listarApellidoNombreAsc", Profesor.class);
+        
+        return myQuery.getResultList();
+
+    }
+
+    @Override
+    public List<Profesor> seleccionarPorCargaHoraria(Integer min, Integer max) {
+        
+        TypedQuery<Profesor> myQuery = this.em.createNamedQuery("Profesor.listarPorCargaHoraria", Profesor.class);
+        
+        myQuery.setParameter("min", min);
+        myQuery.setParameter("max", max);
+
+        return myQuery.getResultList();
+    }
+
+    @Override
+    public Long contarPorDepartamento(String departamento) {
+        
+        TypedQuery<Long> myQuery = this.em.createNamedQuery("Profesor.contarPorDepartamento", Long.class);
+        
+        myQuery.setParameter("departamento", departamento);
+
+        return myQuery.getSingleResult();
+    }
+
+    
 
 }

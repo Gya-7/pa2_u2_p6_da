@@ -19,5 +19,12 @@ public interface ProfesorRepository {
     public List <Profesor> seleccionarPorNombre(String nombre);
 
     public Profesor seleccionarPorCedula(String cedula);
+    
+    public List<Profesor> ordenPorApellidoNombre();
+
+    public List <Profesor> seleccionarPorCargaHoraria(Integer min, Integer max);
+
+    public Long contarPorDepartamento(String departamento);
+
 
 }

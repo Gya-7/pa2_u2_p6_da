@@ -104,6 +104,24 @@ public class ProfesorService {
 
     }
 
+    public List<Profesor> ordenarPorApellidoNombre(){
+
+        return this.profesorRepository.ordenPorApellidoNombre();
+
+    }
+
+    public List<Profesor> consultarPorCargaHoraria(Integer min, Integer max){
+
+        return this.profesorRepository.seleccionarPorCargaHoraria(min, max);
+        
+    }
+
+    public Long contarPorDepartamento(String departamento){
+
+        return this.profesorRepository.contarPorDepartamento(departamento);
+
+    }
+
 
 
 }
