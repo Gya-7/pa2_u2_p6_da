@@ -51,18 +51,60 @@ public class Main {
             e2.setNombre("Carlos");
             e2.setApellido("Bodoque");
             e2.setCedula("1719486523");
-            e2.setFechaNacimiento(LocalDate.of(19911, 05, 13));
+            e2.setFechaNacimiento(LocalDate.of(1911, 05, 13));
             e2.setGenero("M");
 
             this.estudianteService.guardar(e2);
 
-            System.out.println("\nNATIVE QUERY");
-            List<Estudiante> listaNative = this.estudianteService.seleccionarTodosNative();
-            for(Estudiante estudiante: listaNative){
+            System.out.println("\nCRITERIA API QUERY");
+            System.out.println("\nSeleccionar Todos");
+            List<Estudiante> lista = this.estudianteService.seleccionarTodosCriteria();
+            for(Estudiante estudiante: lista){
 
                 System.out.println(estudiante.toString());
 
             }
+
+            System.out.println("\nSeleccionarPorNombre");
+            List<Estudiante> lista1 = this.estudianteService.seleccionarPorNombreCriteria("Carlos");
+            for (Estudiante estudiante : lista1) {
+
+                System.out.println(estudiante.toString());
+
+            }
+
+            System.out.println("\nSeleccionar DINAMICO - NO APELLIDO");
+            List<Estudiante> lista2 = this.estudianteService.seleccionarDinamicoCriteria("Carlos", null);
+            for (Estudiante estudiante : lista2) {
+
+                System.out.println(estudiante.toString());
+
+            }
+
+            System.out.println("\nSeleccionar DINAMICO - NO NOMBRE");
+            List<Estudiante> lista3 = this.estudianteService.seleccionarDinamicoCriteria(null, "Bodoque");
+            for (Estudiante estudiante : lista3) {
+
+                System.out.println(estudiante.toString());
+
+            }
+
+            System.out.println("\nSeleccionar DINAMICO - NADA");
+            List<Estudiante> lista4 = this.estudianteService.seleccionarDinamicoCriteria(null, null);
+            for (Estudiante estudiante : lista4) {
+
+                System.out.println(estudiante.toString());
+
+            }
+
+            System.out.println("\nSeleccionar DINAMICO - AMBOS");
+            List<Estudiante> lista5 = this.estudianteService.seleccionarDinamicoCriteria("Carlos", "Bodoque");
+            for (Estudiante estudiante : lista5) {
+
+                System.out.println(estudiante.toString());
+
+            }
+
 
 
             return 0;

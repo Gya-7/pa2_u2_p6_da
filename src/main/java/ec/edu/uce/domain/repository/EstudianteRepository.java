@@ -32,5 +32,12 @@ public interface EstudianteRepository {
 
     public List<Estudiante> seleccionarTodosNative();
 
+    public List<Estudiante> seleccionarTodosCriteria();
+
+    public List<Estudiante> seleccionarPorNombreCriteria(String nombre);
+
+    public List<Estudiante> seleccionarDinamicoCriteria(String nombre, String apellido);
+
+    //query que se consulte por nombre y apellido a menos que uno de los dos sea nulo
 
 }
