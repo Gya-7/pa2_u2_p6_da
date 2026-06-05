@@ -91,32 +91,49 @@ public class Main {
 
             this.profesorService.guardar(p5);
 
-            System.out.println("\nCONSULTAR TODOS NATIVE");
-            List<Profesor> lista1 = this.profesorService.consultarTodosNative();
-            for(Profesor profesor : lista1){
-                System.out.println(profesor.toString());
-            }
-
-            System.out.println("\nCONSULTAR POR DEPARTAMENTO");
-            List<Profesor> lista2 = this.profesorService.consultarPorDepartamentoNative("Arte");
-            for(Profesor profesor : lista2){
-                System.out.println(profesor.toString());
-            }
-
-            System.out.println("\nCONSULTAR PROFESORES ACTIVOS");
-            List<Profesor> lista3 = this.profesorService.consultarProfesoresActivosNative();
-            for(Profesor profesor : lista3){
-                System.out.println(profesor.toString());
-            }
-
-            System.out.println("\nPROMEDIO DE CARGA HORARIA DE LOS PROFESORES");
-            Long valor = this.profesorService.promedioCargaHorariaNative();
-            System.out.println(valor);
-
-
             
+            
+            System.out.println("\nCRITERIA API QUERY");
 
-        
+            System.out.println("\nCONSULTAR TODOS (CRITERIA)");
+            List<Profesor> listaCriteria1 = this.profesorService.seleccionarTodosCriteria();
+            for(Profesor profesor : listaCriteria1){
+                System.out.println(profesor.toString());
+            }
+
+            System.out.println("\nCONSULTAR POR RANGO DE FECHAS DE INICIO (BETWEEN - CRITERIA)");
+            LocalDate fechaMin = LocalDate.of(1995, 1, 1);
+            LocalDate fechaMax = LocalDate.of(2000, 12, 31);
+            List<Profesor> listaCriteria2 = this.profesorService.betweenValue(fechaMin, fechaMax);
+            for(Profesor profesor : listaCriteria2){
+                System.out.println(profesor.toString());
+            }
+
+            System.out.println("\nCONSULTAR DINÁMICO (NOMBRE Y CARGA HORARIA - CRITERIA)");
+            System.out.println("Solo nombre");
+            List<Profesor> listaCriteria3 = this.profesorService.selectByNombreCargaHoraria("Carlos", null);
+            for(Profesor profesor : listaCriteria3){
+                System.out.println(profesor.toString());
+            }
+
+            System.out.println("\nNombre y carga horaria");
+            List<Profesor> listaCriteria4 = this.profesorService.selectByNombreCargaHoraria("Ana", 10);
+            for(Profesor profesor : listaCriteria4){
+                System.out.println(profesor.toString());
+            }
+
+            System.out.println("\nSolo carga horaria");
+            List<Profesor> listaCriteria5 = this.profesorService.selectByNombreCargaHoraria(null, 2);
+            for(Profesor profesor : listaCriteria5){
+                System.out.println(profesor.toString());
+            }
+
+            System.out.println("\nNada");
+            List<Profesor> listaCriteria6 = this.profesorService.selectByNombreCargaHoraria(null, null);
+            for(Profesor profesor : listaCriteria6){
+                System.out.println(profesor.toString());
+            }
+
 
             return 0;
 

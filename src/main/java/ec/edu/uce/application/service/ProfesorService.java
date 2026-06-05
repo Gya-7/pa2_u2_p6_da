@@ -1,5 +1,6 @@
 package ec.edu.uce.application.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import ec.edu.uce.domain.model.Profesor;
@@ -146,6 +147,22 @@ public class ProfesorService {
 
     }
 
+    public List<Profesor> seleccionarTodosCriteria(){
 
+        return this.profesorRepository.seleccionarTodosCriteria();
+
+    }
+
+    public List<Profesor> betweenValue(LocalDate min, LocalDate max){
+
+        return this.profesorRepository.betweenValue(min, max);
+
+    }
+
+    public List<Profesor> selectByNombreCargaHoraria(String nombre, Integer nivel) {
+
+        return this.profesorRepository.selectByNombreCargaHoraria(nombre, nivel);
+
+    }
 
 }

@@ -1,5 +1,6 @@
 package ec.edu.uce.domain.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import ec.edu.uce.domain.model.Profesor;
@@ -33,6 +34,13 @@ public interface ProfesorRepository {
     public List<Profesor> seleccionarProfesoresActivosNative();
     
     public Long promedioCargaHorariaNative();
+
+    public List<Profesor> seleccionarTodosCriteria();
+
+    public List<Profesor> betweenValue(LocalDate min, LocalDate max); 
+
+    public List<Profesor> selectByNombreCargaHoraria(String nombre, Integer nivel) ;
+
 
 
 }

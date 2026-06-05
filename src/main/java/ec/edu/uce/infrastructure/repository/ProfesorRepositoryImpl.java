@@ -1,9 +1,10 @@
 package ec.edu.uce.infrastructure.repository;
 
-import java.lang.reflect.Type;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import jakarta.persistence.criteria.Predicate;
 
-import ec.edu.uce.domain.model.Estudiante;
 import ec.edu.uce.domain.model.Profesor;
 import ec.edu.uce.domain.repository.ProfesorRepository;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -11,6 +12,9 @@ import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import jakarta.transaction.Transactional;
 
 @ApplicationScoped
@@ -150,6 +154,66 @@ public class ProfesorRepositoryImpl implements ProfesorRepository{
         return ((Number) myQuery.getSingleResult()).longValue();
     }
 
+    @Override
+    public List<Profesor> seleccionarTodosCriteria() {
+        
+        CriteriaBuilder cb = this.em.getCriteriaBuilder();
+        CriteriaQuery<Profesor> myQuery = cb.createQuery(Profesor.class);
+        Root<Profesor> root = myQuery.from(Profesor.class);
+
+        myQuery.select(root);
+
+        TypedQuery<Profesor> p1 = this.em.createQuery(myQuery);
+        return p1.getResultList();
+
+    }
+
+    @Override
+    public List<Profesor> betweenValue(LocalDate min, LocalDate max) { // Cambiamos a LocalDate
+        
+        CriteriaBuilder cb = this.em.getCriteriaBuilder();
+        CriteriaQuery<Profesor> myQuery = cb.createQuery(Profesor.class);
+        Root<Profesor> root = myQuery.from(Profesor.class);
+        
+        Predicate condicionBetween = cb.between(root.get("fechaInicio"), min, max);
+        
+        myQuery.select(root).where(condicionBetween);
+        
+        TypedQuery<Profesor> tq = this.em.createQuery(myQuery);
+        return tq.getResultList();
+    }
+
+
+    @Override
+    public List<Profesor> selectByNombreCargaHoraria(String nombre, Integer cargaHoraria) {
+
+        CriteriaBuilder cb = this.em.getCriteriaBuilder();
+        CriteriaQuery<Profesor> myQuery = cb.createQuery(Profesor.class);
+        Root<Profesor> root = myQuery.from(Profesor.class);
+
+        List<Predicate> condiciones = new ArrayList<>();
+
+        if (nombre != null) {
+
+            Predicate p1 = cb.equal(root.get("nombre"), nombre);
+            condiciones.add(p1);
+            
+        }
+
+        if (cargaHoraria != null) {
+
+            Predicate p2 = cb.equal(root.get("cargaHoraria"), cargaHoraria);
+            condiciones.add(p2);
+            
+        }
+
+        myQuery.select(root).where(condiciones);
+
+        TypedQuery<Profesor> tq = this.em.createQuery(myQuery);
+        
+        return tq.getResultList();
+        
+    }
     
 
 }
