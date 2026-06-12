@@ -2,8 +2,8 @@ package ec.edu.uce;
 
 import java.time.LocalDateTime;
 
-import ec.edu.uce.application.service.CiudadanoService;
-import ec.edu.uce.domain.model.Ciudadano;
+import ec.edu.uce.application.service.GameCharacterService;
+import ec.edu.uce.domain.model.GameCharacter;
 import io.quarkus.runtime.Quarkus;
 import io.quarkus.runtime.QuarkusApplication;
 import io.quarkus.runtime.annotations.QuarkusMain;
@@ -22,17 +22,20 @@ public class Main {
 
 
         @Inject
-        private CiudadanoService ciudadanoService;
+        private GameCharacterService gcService;
 
         @Override
         public int run(String... args) {
 
-            Ciudadano c = new Ciudadano();
+            GameCharacter gc = new GameCharacter();
+            gc.setLevel(1);
+            gc.setNickname("Houston");
+            gc.setType("Assassin");
+            gc.setLifePoints(100);
 
-            c.setNombre("Alejandro");
-            c.setFechaNacimiento(LocalDateTime.of(1992, 03, 25, 07, 26));
-            
-            this.ciudadanoService.insertarCiudadano(c);
+
+            this.gcService.create(gc);
+
             
 
             return 0;

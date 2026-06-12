@@ -1,7 +1,7 @@
 package ec.edu.uce.infrastructure.repository;
 
-import ec.edu.uce.domain.model.Ciudadano;
-import ec.edu.uce.domain.repository.CiudadanoRepository;
+import ec.edu.uce.domain.model.GameCharacter;
+import ec.edu.uce.domain.repository.GameCharacterRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
@@ -9,17 +9,17 @@ import jakarta.transaction.Transactional;
 
 @ApplicationScoped
 @Transactional
-public class CiudadanoRepositoryImpl implements CiudadanoRepository{
-
+public class GameCharacterRepositoryImpl implements GameCharacterRepository{
 
     @Inject
     private EntityManager em;
 
     @Override
-    public void insertar(Ciudadano ciudadano) {
-
-        this.em.persist(ciudadano);
+    public void insertar(GameCharacter gc) {
         
+        this.em.persist(gc);
     }
+
+
 
 }
