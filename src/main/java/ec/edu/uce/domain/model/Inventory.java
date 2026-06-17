@@ -1,5 +1,6 @@
 package ec.edu.uce.domain.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,7 +30,7 @@ public class Inventory {
     @Column(name = "inve_state")
     private String state;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "inve_player")
     private GameCharacter character;
 
