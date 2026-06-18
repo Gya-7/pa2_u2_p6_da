@@ -1,11 +1,12 @@
 package ec.edu.uce;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
-import ec.edu.uce.application.service.CiudadanoService;
-import ec.edu.uce.application.service.EmpleadoService;
-import ec.edu.uce.domain.model.Ciudadano;
-import ec.edu.uce.domain.model.Empleado;
+import ec.edu.uce.application.service.ClienteService;
+import ec.edu.uce.domain.model.Cliente;
+import ec.edu.uce.domain.model.Pedido;
 import io.quarkus.runtime.Quarkus;
 import io.quarkus.runtime.QuarkusApplication;
 import io.quarkus.runtime.annotations.QuarkusMain;
@@ -24,52 +25,40 @@ public class Main {
 
 
         @Inject
-        private CiudadanoService ciudadanoService;
-
-        @Inject 
-        private EmpleadoService  empleadoService;
+        private ClienteService clienteService;
 
         @Override
         public int run(String... args) {
 
-            /* 
-            
-            Ciudadano c = new Ciudadano();
+            System.out.println("Inicio Programa");
 
-            c.setNombre("Alejandro");
-            c.setFechaNacimiento(LocalDateTime.of(1992, 03, 25, 07, 26));
-            
-            //this.ciudadanoService.insertarCiudadano(c);
-            
-            Empleado e = new Empleado();
+            Cliente c = new Cliente();
+            c.setNombre("Dayerlin");
+            c.setCedula("1719758690");
 
-            e.setCiudadano(c);
-            e.setFechaIngreso(LocalDateTime.now());
-            e.setSalario(12300.0);
-            
-            this.empleadoService.crear(e);
+            Pedido p1 = new Pedido();
+            p1.setTotal(10.0);
+            p1.setCliente(c);
+            p1.setFecha(LocalDate.of(2026, 10, 10));
 
-            */
+            Pedido p2 = new Pedido();
+            p2.setTotal(100.0);
+            p2.setCliente(c);
+            p2.setFecha(LocalDate.of(2026, 1, 5));
 
-            //crear un nuevo ciudadano con su propio service y ese mismo seteenle para crear un nuevo empleado con su propio service 
+            List<Pedido> pedidos = new ArrayList<>();
+            pedidos.add(p1);
+            pedidos.add(p2);
 
-            
-            Ciudadano c = new Ciudadano();
-            c.setNombre("NUEVO TRANSACCION");
-            c.setFechaNacimiento(LocalDateTime.of(2000, 05, 25, 0, 0));
-            // this.ciudadanoService.insertarCiudadano(c1);
-            
-            //c1.setNombre("Carlos");
+            c.setPedidos(pedidos);
 
-            Empleado e = new Empleado();
-            e.setCiudadano(c);
-            e.setFechaIngreso(LocalDateTime.of(1888, 8, 8, 8, 8));
-            e.setSalario(null);
+            this.clienteService.crear(c);
 
-            this.empleadoService.crear(e);
-            
+       
+
             return 0;
-
+            
+            
         }
 
     }
