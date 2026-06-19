@@ -1,5 +1,7 @@
 package ec.edu.uce.domain.model;
 
+import java.util.List;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -7,6 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -33,6 +36,9 @@ public class Inventory {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "inve_player")
     private GameCharacter character;
+
+    @OneToMany(mappedBy = "inventory", cascade = CascadeType.ALL)
+    private List<Item> items;
 
     public Integer getId() {
         return id;
@@ -73,13 +79,19 @@ public class Inventory {
     public void setCharacter(GameCharacter character) {
         this.character = character;
     }
-    
 
+    public List<Item> getItem() {
+        return items;
+    }
+
+    public void setItem(List<Item> item) {
+        this.items = item;
+    }
+    
     @Override
     public String toString() {
         return "Inventory [id=" + id + ", totalSpace=" + totalSpace + ", occupiedSpace=" + occupiedSpace + ", state="
                 + state + ", character=" + character + "]";
     }
-
     
 }

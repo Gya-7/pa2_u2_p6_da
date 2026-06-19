@@ -1,9 +1,11 @@
 package ec.edu.uce;
 
-import ec.edu.uce.application.service.GameCharacterService;
+import java.util.ArrayList;
+import java.util.List;
+
 import ec.edu.uce.application.service.InventoryService;
-import ec.edu.uce.domain.model.GameCharacter;
 import ec.edu.uce.domain.model.Inventory;
+import ec.edu.uce.domain.model.Item;
 import io.quarkus.runtime.Quarkus;
 import io.quarkus.runtime.QuarkusApplication;
 import io.quarkus.runtime.annotations.QuarkusMain;
@@ -20,30 +22,36 @@ public class Main {
 
     public static class App implements QuarkusApplication {
 
-
-        @Inject
-        private GameCharacterService gcService;
-
         @Inject
         private InventoryService invService;
 
         @Override
         public int run(String... args) {
 
+            Inventory in = new Inventory();
+            in.setTotalSpace(10);
+            in.setOccupiedSpace(2);
+            in.setState("AVAILABLE");
+
+            Item item = new Item();
             
-            GameCharacter gc = new GameCharacter();
-            gc.setNickname("Milo");
-            gc.setType("Mage");
-            gc.setLevel(3);
-            gc.setLifePoints(1400);
+            item.setNombre("Pocion de vida");
+            item.setCantidad(3);
+            item.setInventory(in);
+            
+            Item item2 = new Item();
+            item2.setNombre("Espada curva");
+            item2.setCantidad(3);
+            item2.setInventory(in);
 
-            Inventory inv = new Inventory();
-            inv.setTotalSpace(6);
-            inv.setOccupiedSpace(2);
-            inv.setState("ACTIVO");
-            inv.setCharacter(gc);
+            List<Item> items = new ArrayList<>();
+            items.add(item);
+            items.add(item2);
 
-            this.invService.crear(inv);
+            
+            in.setItem(items);
+
+            this.invService.crear(in);
 
             return 0;
 
