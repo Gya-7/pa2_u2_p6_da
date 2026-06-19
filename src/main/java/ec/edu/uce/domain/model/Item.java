@@ -19,11 +19,11 @@ public class Item {
     @Column(name = "item_id")
     private Integer id;
     
-    @Column(name = "item_nombre")
-    private String nombre;
+    @Column(name = "item_name")
+    private String name;
 
-    @Column(name = "item_cantidad")
-    private Integer cantidad;
+    @Column(name = "item_quantity")
+    private Integer quantity;
 
     @ManyToOne
     private Inventory inventory;
@@ -36,20 +36,20 @@ public class Item {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Integer getCantidad() {
-        return cantidad;
+    public Integer getQuantity() {
+        return quantity;
     }
 
-    public void setCantidad(Integer cantidad) {
-        this.cantidad = cantidad;
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
     public Inventory getInventory() {

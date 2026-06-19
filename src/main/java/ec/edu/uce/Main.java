@@ -35,13 +35,13 @@ public class Main {
 
             Item item = new Item();
             
-            item.setNombre("Pocion de vida");
-            item.setCantidad(3);
+            item.setName("Pocion de vida");
+            item.setQuantity(3);
             item.setInventory(in);
             
             Item item2 = new Item();
-            item2.setNombre("Espada curva");
-            item2.setCantidad(3);
+            item2.setName("Espada curva");
+            item2.setQuantity(3);
             item2.setInventory(in);
 
             List<Item> items = new ArrayList<>();
