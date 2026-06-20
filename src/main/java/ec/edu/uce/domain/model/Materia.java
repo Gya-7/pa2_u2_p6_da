@@ -1,10 +1,15 @@
 package ec.edu.uce.domain.model;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
@@ -21,6 +26,10 @@ public class Materia {
     private String nombre;
     @Column(name = "mate_numero_creditos")
     private Integer numeroCreditos;
+
+    //Se le pone el nombre exacto del atributo de la clase que esta haciendo las Join columns
+    @ManyToMany(mappedBy = "materias", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Alumno> alumnos;
 
     public Integer getId() {
         return id;
@@ -45,6 +54,30 @@ public class Materia {
     public void setNumeroCreditos(Integer numeroCreditos) {
         this.numeroCreditos = numeroCreditos;
     }
+
+    public List<Alumno> getAlumnos() {
+        return alumnos;
+    }
+
+    public void setAlumnos(List<Alumno> alumnos) {
+        this.alumnos = alumnos;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Materia{");
+        sb.append("id=").append(id);
+        sb.append(", nombre=").append(nombre);
+        sb.append(", numeroCreditos=").append(numeroCreditos);
+        sb.append(", alumnos=").append(alumnos);
+        sb.append('}');
+        return sb.toString();
+    }
+
+    
+
+
 
     
 
