@@ -2,8 +2,10 @@ package ec.edu.uce.domain.model;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -35,7 +37,7 @@ public class GameCharacter {
     @Column(name = "char_life_points")
     private Integer lifePoints; 
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "character_missions", joinColumns = @JoinColumn(name = "chmi_id_character"), inverseJoinColumns = @JoinColumn(name = "chmi_id_mission"))
     private List<Mission> missions;
 
@@ -77,6 +79,14 @@ public class GameCharacter {
 
     public void setLifePoints(Integer lifePoints) {
         this.lifePoints = lifePoints;
+    }
+
+    public List<Mission> getMissions() {
+        return missions;
+    }
+
+    public void setMissions(List<Mission> missions) {
+        this.missions = missions;
     }
 
     @Override

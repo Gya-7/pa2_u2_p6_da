@@ -5,6 +5,7 @@ import ec.edu.uce.domain.model.GameCharacter;
 public interface GameCharacterRepository {
 
     public void insertar(GameCharacter gc);
+    public GameCharacter findById(Integer id);
 
 
 }

@@ -11,9 +11,15 @@ public class GameCharacterService {
     @Inject
     private GameCharacterRepository gcRepository;
 
-    public void create(GameCharacter gc){
+    public void crear(GameCharacter gc){
 
         this.gcRepository.insertar(gc);
+
+    }
+
+    public GameCharacter seleccionarPorId(Integer id){
+
+        return this.gcRepository.findById(id);
 
     }
 

@@ -20,6 +20,13 @@ public class GameCharacterRepositoryImpl implements GameCharacterRepository{
         this.em.persist(gc);
     }
 
+    @Override
+    public GameCharacter findById(Integer id) {
+        
+        return this.em.find(GameCharacter.class, id);
+
+    }
+
 
 
 }
