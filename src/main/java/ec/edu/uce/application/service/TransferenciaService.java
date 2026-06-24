@@ -2,7 +2,6 @@ package ec.edu.uce.application.service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.List;
 
 import ec.edu.uce.domain.model.Cuenta;
 import ec.edu.uce.domain.model.Transferencia;
@@ -43,8 +42,8 @@ public class TransferenciaService {
             t.setValor(valor);
             t.setFecha(LocalDate.now());
 
-            if(c1.getTransferenciasRealizadas() != null) c1.getTransferenciasRealizadas().add(t);
-            if(c2.getTransferenciasRecibidas() != null) c2.getTransferenciasRecibidas().add(t);
+            c1.getTransferenciasRealizadas().add(t);
+            c2.getTransferenciasRecibidas().add(t);
 
             this.crear(t);
             

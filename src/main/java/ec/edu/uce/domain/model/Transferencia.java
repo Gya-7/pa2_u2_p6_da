@@ -69,8 +69,8 @@ public class Transferencia {
     }
     @Override
     public String toString() {
-        return "Transferencia [id=" + id + ", valor=" + valor + ", fecha=" + fecha + ", cuentaDestino=" + cuentaDestino.getNombreTitular()
-                + ", cuentaOrigen=" + cuentaOrigen.getNombreTitular() + "]";
+        return "\nTransferencia  \nId: " + id + "\nValor: " + valor + "\nFecha: " + fecha + "\nCuenta Destino: " + cuentaDestino.getNombreTitular()
+                + "\nCuenta Origen: " + cuentaOrigen.getNombreTitular() + "\n";
     }
 
     
