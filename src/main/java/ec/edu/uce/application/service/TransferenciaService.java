@@ -26,33 +26,33 @@ public class TransferenciaService {
         this.tRepository.insert(transferencia);
     }
 
-    @Transactional
-    public void realizarTransferencia(String cuentaOrigen, String cuentaDestino,  BigDecimal valor){
+   @Transactional
+    public void realizarTransferencia(String cuentaOrigen, String cuentaDestino, BigDecimal valor){
 
         Cuenta c1 = this.cRepository.findByNumCuenta(cuentaOrigen);
         Cuenta c2 = this.cRepository.findByNumCuenta(cuentaDestino);
 
-
         if(c1.getMonto().compareTo(valor) >= 0){
 
-            BigDecimal valorResultado = c1.getMonto().subtract(valor);
-            c1.setMonto(valorResultado);
-            BigDecimal valorNuevo = c2.getMonto().add(valor);
-            c2.setMonto(valorNuevo);
+            c1.setMonto(c1.getMonto().subtract(valor));
+            c2.setMonto(c2.getMonto().add(valor));
 
+            Transferencia t = new Transferencia();
+            t.setCuentaOrigen(c1); 
+            t.setCuentaDestino(c2); 
+            t.setValor(valor);
+            t.setFecha(LocalDate.now());
+
+            if(c1.getTransferenciasRealizadas() != null) c1.getTransferenciasRealizadas().add(t);
+            if(c2.getTransferenciasRecibidas() != null) c2.getTransferenciasRecibidas().add(t);
+
+            this.crear(t);
+            
+            System.out.println("Transferencia exitosa.");
+
+        } else {
+            System.out.println("Saldo insuficiente para la transferencia.");
         }
-
-        Transferencia t = new Transferencia();
-        t.setCuentaDestino(this.cRepository.findByNumCuenta(cuentaDestino));
-        t.setCuentaOrigen(this.cRepository.findByNumCuenta(cuentaOrigen));
-        t.setValor(valor);
-        t.setFecha(LocalDate.now());
-
-        c1.setTransferenciasRealizadas(List.of(t));
-        c2.setTransferenciasRecibidas(List.of(t));
-
-        this.crear(t);
-
     }
 
 }

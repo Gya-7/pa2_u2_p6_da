@@ -67,10 +67,13 @@ public class Transferencia {
     public void setCuentaOrigen(Cuenta cuentaOrigen) {
         this.cuentaOrigen = cuentaOrigen;
     }
+    @Override
+    public String toString() {
+        return "Transferencia [id=" + id + ", valor=" + valor + ", fecha=" + fecha + ", cuentaDestino=" + cuentaDestino.getNombreTitular()
+                + ", cuentaOrigen=" + cuentaOrigen.getNombreTitular() + "]";
+    }
 
     
-
-
 
 
 }

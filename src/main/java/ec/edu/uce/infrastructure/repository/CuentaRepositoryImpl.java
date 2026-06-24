@@ -23,8 +23,8 @@ public class CuentaRepositoryImpl implements CuentaRepository{
 
     @Override
     public Cuenta findByNumCuenta(String numCuenta) {
-        
-        return this.em.find(Cuenta.class, numCuenta);
+        return this.em.createQuery("SELECT c FROM Cuenta c WHERE c.numeroCuenta = :numero", Cuenta.class)
+                      .setParameter("numero", numCuenta)
+                      .getSingleResult();
     }
-
 }

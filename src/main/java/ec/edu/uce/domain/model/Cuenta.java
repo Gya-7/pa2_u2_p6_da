@@ -6,6 +6,7 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -29,10 +30,10 @@ public class Cuenta {
     @Column(name = "cuen_monto")
     private BigDecimal monto;
 
-    @OneToMany(mappedBy= "cuentaDestino", cascade= CascadeType.ALL)
+    @OneToMany(mappedBy= "cuentaDestino", cascade= CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Transferencia> transferenciasRecibidas;
 
-    @OneToMany(mappedBy = "cuentaOrigen", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cuentaOrigen", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Transferencia> transferenciasRealizadas;
 
     public Integer getId() {
@@ -83,11 +84,5 @@ public class Cuenta {
         this.transferenciasRealizadas = transferenciasRealizadas;
     }
 
-    
-
-
-    
-
-    
 
 }
